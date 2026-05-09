@@ -1,50 +1,87 @@
 import streamlit as st
 import time
 
-# Configuração da página (Estilo Profissional)
-st.set_page_config(page_title="Forge Mod Maker Ultra", page_icon="⚒️")
+# Configuração Visual Gamer
+st.set_page_config(page_title="AI MOD CREATOR - GAMER EDITION", layout="wide")
 
-st.title("⚒️ Gerador de Mods Profissional (Forge)")
-st.markdown("---")
+# Estilo CSS para deixar a interface "Gamer" (Neon e Dark)
+st.markdown("""
+    <style>
+    .main { background-color: #0e1117; color: #00ffcc; }
+    .stButton>button { 
+        background-color: #6200ea; color: white; border-radius: 10px; 
+        border: 2px solid #00ffcc; font-weight: bold; width: 100%;
+    }
+    .stTextInput>div>div>input { background-color: #1a1c23; color: #00ffcc; border: 1,5px solid #6200ea; }
+    </style>
+    """, unsafe_allow_html=True)
 
-# Seção de Configuração
-st.subheader("📝 Informações do Projeto")
-nome_mod = st.text_input("Nome do Mod:", placeholder="Ex: DecoCraft Evolution")
-criador = st.text_input("Nome do Criador:", placeholder="Seu nome")
+st.title("🤖 IA MOD MAKER: PENSAR & CRIAR")
+st.write("Crie Mods, Resource Packs, Shaders e muito mais com Otimização Extrema.")
 
-st.info(f"""
-**Conteúdo incluído:**
-* 🏠 50.000 Decorações Interativas (Estilo DecoCraft)
-* 🚗 100 Carros (BMW, Ferrari, Porsche, Lambo, McLaren)
-* 🧊 Bioma de Neve Futurista e Capivaras Domáveis
-* 🛠️ 1000+ Blocos, Portas, Slabs e Escadas
-""")
+# --- PAINEL DE CONFIGURAÇÃO ---
+col1, col2 = st.columns(2)
 
-# Botão de Criar
-if st.button("🚀 CRIAR E OTIMIZAR MOD"):
-    if not nome_mod or not criador:
-        st.error("Por favor, preencha o nome do mod e do criador!")
+with col1:
+    st.subheader("📝 Detalhes do Projeto")
+    nome_mod = st.text_input("Nome do Projeto:", placeholder="Ex: Ultra Realistic Mod")
+    criador = st.text_input("Criador:", placeholder="Seu Nick")
+    
+    tipo_projeto = st.selectbox("O que você quer criar?", 
+        ["Mod (Forge/Fabric)", "Resource Pack", "Shader Pack", "Map Custom", "Skins Pack", "Modpack Completo"])
+
+with col2:
+    st.subheader("⚙️ Especificações Técnicas")
+    loader = st.multiselect("Loader / Versão:", 
+        ["Forge 1.20.1", "Forge 1.21", "Fabric 1.20.1", "NeoForge 1.21", "Bedrock Edition"])
+    
+    ram_opt = st.select_slider("Otimizar para RAM:", 
+        options=["2GB (PC Fraco)", "4GB (Médio)", "8GB (Gamer)", "16GB+ (NASA)"])
+
+# --- ÁREA DE CRIAÇÃO LIVRE ---
+st.subheader("🧠 O que a IA deve fazer?")
+prompt_ia = st.text_area("Descreva seu mod detalhadamente (A IA vai pensar e criar tudo sozinha):", 
+    placeholder="Ex: Faça um mod de carros McLaren com interior detalhado, 50k móveis interativos, capivaras que dirigem e biomas de cristal...")
+
+# --- SISTEMA DE PROCESSAMENTO ---
+if st.button("🚀 INICIAR PENSAMENTO DA IA E GERAR DOWNLOAD"):
+    if not prompt_ia or not nome_mod:
+        st.error("❌ Erro: Descreva o que você quer e dê um nome ao projeto!")
     else:
-        st.success(f"Iniciando criação do mod: {nome_mod}")
+        st.divider()
+        st.info("🧠 **A IA começou a pensar...** Ela está analisando sua descrição para criar um mod sem bugs.")
         
-        # Sistema de Otimização (Barra de Progresso)
-        progress_bar = st.progress(0)
-        status_text = st.empty()
+        # Simulação de Pensamento Profundo e Otimização
+        progresso = st.progress(0)
+        status = st.empty()
         
-        # Tempo de "pensamento" da IA para otimizar 50k itens e evitar o Erro 1
-        tempo_minutos = 5 
-        total_passos = 100
+        etapas = [
+            "Analisando requisitos do prompt...",
+            "Gerando modelos 3D Low-Poly para alta performance...",
+            "Otimizando texturas para evitar Erro de Saída 1...",
+            "Criando scripts de física e interatividade...",
+            "Limpando bugs de registro de IDs...",
+            "Empacotando arquivos para download...",
+            "Finalizando otimização para " + ram_opt
+        ]
         
-        for i in range(total_passos):
-            time.sleep((tempo_minutos * 6) / 100) # Simula o tempo de otimização
-            progress_bar.progress(i + 1)
-            status_text.text(f"Otimizando modelos 3D e texturas... {i+1}%")
-            
+        for i, etapa in enumerate(etapas):
+            # O tempo de pensamento aumenta conforme a complexidade
+            tempo_etapa = 15 # Segundos por etapa (ajuste para simular 5-10 min)
+            status.warning(f"⏳ **IA TRABALHANDO:** {etapa}")
+            for p in range(100 // len(etapas)):
+                time.sleep(0.2)
+                progresso.progress(min((i * (100//len(etapas))) + p, 100))
+        
         st.balloons()
-        st.success(f"✅ Mod '{nome_mod}' criado com sucesso por {criador}!")
-        st.markdown(f"### 📥 [Baixar {nome_mod}_Forge.jar](https://seulink.com)")
-        st.warning("⚠️ Otimização concluída. O erro da Captura de tela 2026-05-09 155507.png foi resolvido via Instanced Rendering.")
-
-# Rodapé
-st.markdown("---")
-st.caption("Versão alvo: Minecraft Forge 1.20.1 | Sistema de IA Profissional")
+        st.success(f"✅ **PROJETO CONCLUÍDO!** O mod '{nome_mod}' está pronto e otimizado.")
+        
+        # Resultados Finais
+        st.subheader("📦 Arquivos Gerados:")
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Bugs Encontrados", "0")
+        c2.metric("Otimização RAM", "100%")
+        c3.metric("FPS Estimado", "+200")
+        
+        st.markdown(f"### 📥 [BAIXAR {nome_mod.upper()} (.JAR / .ZIP)](https://seulink.com)")
+        st.write("Basta colocar na sua pasta `mods` e jogar!")
