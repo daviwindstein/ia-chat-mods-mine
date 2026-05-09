@@ -26,7 +26,7 @@ st.title("⚡ IA MOD MAKER SUPREMA: VERSÃO FINAL")
 with st.sidebar:
     st.header("🔑 API SETTINGS")
     groq_key = st.text_input("Groq API Key:", type="password")
-    if groq_key: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
+    if groq_key: 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
         st.success("Groq Ativa!")
 
 # --- CONFIGURAÇÃO DO MOD ---
