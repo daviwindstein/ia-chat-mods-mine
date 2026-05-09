@@ -49,3 +49,20 @@ class ModMinecraft:
 mod = ModMinecraft()
 mod.configurar_decoracao()
 mod.configurar_mundo()
+
+# SCRIPT DE RENDERIZAÇÃO CORRIGIDO
+def sistema_render_profissional(self, objeto_id):
+    # 1. RESET DE COR (Isso impede que a tela fique branca)
+    self.limpar_cache_render()
+    self.set_color(1.0, 1.0, 1.0, 1.0) # Reseta para cores normais
+    
+    # 2. RENDERIZAÇÃO CONDICIONAL
+    if self.modo_posicionamento:
+        # Só fica branco o BLOCO que você está segurando, não o mundo!
+        self.desenhar_preview_fantasma(objeto_id, transparencia=0.5)
+    else:
+        # Renderiza as cores reais da Ferrari, BMW e das Capivaras
+        self.aplicar_textura_realista(objeto_id)
+
+    # 3. FINALIZAÇÃO DE FRAME
+    self.fechar_batch_render()
