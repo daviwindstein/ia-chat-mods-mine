@@ -27,7 +27,7 @@ st.write("Crie mods reais com abas no inventário e busca funcional.")
 # --- LUGAR FÁCIL PARA A CHAVE DA GROQ ---
 st.markdown('<div class="groq-box">', unsafe_allow_html=True)
 st.subheader("🔑 CENTRAL DE ATIVAÇÃO GROQ")
-groq_key = st.text_input("COLE SUA API KEY DA GROQ AQUI:", type="password", placeholder="gsk_xxxxxxxxxxxxxxxxxxxx")
+groq_key = st.text_input("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:", type="password", placeholder="gsk_xxxxxxxxxxxxxxxxxxxx")
 if groq_key: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
     st.success("⚡ MOTOR GROQ ATIVADO: VELOCIDADE MÁXIMA DE GERAÇÃO!")
 st.markdown('</div>', unsafe_allow_html=True)
